@@ -1,6 +1,8 @@
 import matplotlib.pyplot as plt
 from random import random
-
-data = [random() for i in range(10000)]
-plt.hist(data, bins=100)
+input = open('float_data.txt', 'r')
+data = input.readlines()
+for i in range(len(data)):
+	data[i] = float(data[i])
+plt.hist(data, bins=20)
 plt.show()
