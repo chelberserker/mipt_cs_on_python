@@ -1,2 +1,6 @@
 input = open('input.txt', 'r')
-a = split(readlines())
+a = input.readline().split()
+for i in range(len(a)):
+	a[i] = len(a[i])
+for i in range(len(a)):
+	
