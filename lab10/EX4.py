@@ -1,7 +1,7 @@
 def creatingdictionary(f):
     Dictionary = dict()
-    for line in f:
-        s = f.readline()
+    while line != '':
+        line = inp.readline()
         enword = s[:s.index('\t')]
         rword = s[s.index('\t')+3:]
         Dictionary[enword]=rword
@@ -24,5 +24,7 @@ def translation(s, Dict):
 inp = open('input.txt', 'r')
 output = open('output.txt', 'w')
 dictionary = creatingdictionary(inp)
-for line in inp:
+while line != '':
+    line = inp.readline()
+    print(line)
     print(translation(line, dictionary, file=output))
