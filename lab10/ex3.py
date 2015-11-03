@@ -11,11 +11,12 @@ for i in range(len(s)):
     if s[i] != ' ':
         word += s[i]
     else:
-        if word in Dictionary:
+        if word in dictionary:
             dictionary[word] += 1
         else:
             dictionary[word] = 1
     word = ''
 mx = 0
 for keys in dictionary:
-    mx = max(mx, keys)
+    mx = max(mx, dictionary[keys])
+
