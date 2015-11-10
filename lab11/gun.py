@@ -44,7 +44,7 @@ class ball():
         self.vx = self.vx
         self.vy -= self.g*dt
         self.x += self.vx*dt
-        self.y += self.vy*dt
+        self.y -= self.vy*dt
         if self.y == 0  or self.y == 600:
             self.vx = self.vx
             self.vy = - self.vy
@@ -85,7 +85,7 @@ class gun():
         new_ball.r += 5
         self.an = math.atan((event.y-new_ball.y)/(event.x-new_ball.x))
         new_ball.vx = self.f2_power*math.cos(self.an)
-        new_ball.vy = self.f2_power*math.sin(self.an)
+        new_ball.vy = -self.f2_power*math.sin(self.an)
         balls += [new_ball]
         self.f2_on = 0
         self.f2_power = 10
