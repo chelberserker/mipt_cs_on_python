@@ -39,7 +39,7 @@ class ball():
         canv.coords(self.id, self.x-self.r, self.y-self.r, self.x+self.r, self.y+self.r)
          
     def move(self):
-        dt = 0.01
+        dt = 0.1
         print(self.x, self.y)
         self.vx = self.vx
         self.vy -= self.g*dt
@@ -51,7 +51,7 @@ class ball():
         if self.x == 800 or self.y == 0:
             self.vx = -self.vx
             self.vy = self.vy
-
+        self.set_coords()
 
     def hittest(self,ob):
         """	
@@ -85,7 +85,7 @@ class gun():
         new_ball.r += 5
         self.an = math.atan((event.y-new_ball.y)/(event.x-new_ball.x))
         new_ball.vx = self.f2_power*math.cos(self.an)
-        new_ball.vy = -self.f2_power*math.sin(self.an)
+        new_ball.vy = self.f2_power*math.sin(self.an)
         balls += [new_ball]
         self.f2_on = 0
         self.f2_power = 10
