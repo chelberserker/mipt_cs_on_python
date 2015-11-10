@@ -1,4 +1,5 @@
 class Point:
+    
     def __init__(self, x = 0, y = 0, mass = 0):
         self.x = x
         self.y = y
@@ -20,7 +21,8 @@ for i in range(n):
     A = input().split()
     A[0] = int(A[0])
     A[1] = int(A[1])
-    a = Point(A[0], A[1], 1)
+    A[2] = int(A[2])
+    a = Point(A[0], A[1], A[2])
     if a.dist > dist.dist:
         dist = a
     cm = a + cm 
