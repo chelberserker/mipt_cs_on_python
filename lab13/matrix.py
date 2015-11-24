@@ -61,8 +61,16 @@ class Matrix:
                     result.X[i][j] = float(float(self.get(i,j))*float(other))
             return result
         if type(other) == Matrix:
-            #FIX ME
-            pass
+            if self.get_n() == other.get_m():
+                result = Matrix(self.get_m(), other.get_n())
+                for i in range(result.get_m()):
+                    for j in range(result.get_n()):
+                        num = 0
+                        for a in range(self.get_n()):
+                            for b in range(other.get_m()):
+                                num += self.get(a,i) * other.get(b,j)
+                        result.X[i][j] = num
+            return result
 
 
     def __truediv__(self, other):
