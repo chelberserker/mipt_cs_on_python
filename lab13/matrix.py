@@ -3,14 +3,24 @@ class Matrix:
     n = None
     X = None
 
-    def __init__(self, a, b):
-        self.m = a
-        self.n = b
-        self.X = []
-        for i in range(self.m):
-            self.X.append([])
-            for j in range(self.n):
-                self.X[i].append(float(0))
+    def __init__(self, a, b= None):
+        if type(a) == int and type(b) == int:
+            if a <= 0 or b <= 0:
+                raise ValueError
+            else:
+                self.m = a
+                self.n = b
+                self.X = []
+                for i in range(self.m):
+                    self.X.append([])
+                    for j in range(self.n):
+                        self.X[i].append(float(0))
+        elif type(a) == list and b == None:
+            self.X = a
+            self.m = len(self.X[1])
+            self.n = len(self.X)
+        else:
+            raise ValueError
 
     def get_m(self):
         return self.m
@@ -28,6 +38,8 @@ class Matrix:
         self.X[i][j] = a
 
     def __eq__(self, other):
+        if self.get_size() != other.get_size():
+            raise RuntimeError
         a = True
         if self.get_m() == other.get_m() and self.get_n() == other.get_n():
             for i in range(self.m):
@@ -66,14 +78,33 @@ class Matrix:
                 for i in range(result.get_m()):
                     for j in range(result.get_n()):
                         num = 0
-                        for a in range(self.get_n()):
-                            for b in range(other.get_m()):
+                        for a in range(self.get_m()):
+                            for b in range(other.get_n()):
                                 num += self.get(a,i) * other.get(b,j)
                         result.X[i][j] = num
+            else:
+                raise RuntimeError
             return result
+
+
+    def transpose(self):
+        C = Matrix(self.get_n(), self.get_m())
+        for i in range(self.get_m()):
+            for j in range(self.get_n()):
+                C.X[j][i] = self.X[i][j]
+        return C
 
 
     def __truediv__(self, other):
         result = self * (1/other)
         return result
+
+    def determinant(self):
+        if self.get_m() == 2 and self.get_n() == 2:
+            return self.get(0, 0)*self.get(1,1)-self.get(0,1)*self.get(1,0)
+        elif self.get_m() == 3 and self.get_n() == 3:
+            return self.get(0, 0)*self.get(1,1)*self.get(2,2)-self.get(0, 0)*self.get(1,2)*self.get(2,1)-self.get(0, 1)*self.get(1, 0)*self.get(2,2)+self.get(0,1)*self.get(1,2)*self.get(2,0)+self.get(0, 2)*self.get(1,0)*self.get(2,1)-self.get(0, 2)*self.get(1,1)*self.get(2,0)
+        else:
+            raise RuntimeError
+
 
